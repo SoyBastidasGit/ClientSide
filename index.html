@@ -1,53 +1,95 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" href="styles.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<head>
-    <title>Ejemplo de Página Web</title>
-    <script src="ruta_al_framework.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
+<div class="main-top">
+    <h1>Dashboard</h1>
+</div>
 
-<body>
-    <h1>Mi Página Web</h1>
-
-    <p>Este es un ejemplo básico de una página web.</p>
-
-    <a href="https://www.ejemplo.com">Enlace a Ejemplo</a>
-
-    <ul>
-        <li>Elemento 1</li>
-        <li>Elemento 2</li>
-        <li>Elemento 3</li>
-    </ul>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Encabezado 1</th>
-                <th>Encabezado 2</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Dato 1</td>
-                <td>Dato 2</td>
-            </tr>
-            <tr>
-                <td>Dato 3</td>
-                <td>Dato 4</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <script>
-    // Código JavaScript utilizando el framework seleccionado para reaccionar a eventos y realizar validaciones del lado del cliente
-    </script>
-
-    <img src="ruta_a_la_imagen.jpg" alt="Descripción de la imagen">
-
-    <div id="mi-aplicacion">
-        <!-- Contenido de la aplicación -->
+<div>
+    <div class="dash-container">
+        <div class="dash-item dash-header">
+            <div class="dash-item-title">Resumen</div>
+            <!--<canvas id="Resumen"></canvas> -->
+            <p>El resultado arroja que el inventario cuante con un total de 9 poductos diferentes y el orden de
+                produccion con un usuario</p>
+            <div class="dash-item-content"> </div>
+        </div>
+        <div class="dash-item">
+            <div class="dash-item-title">Ordenes en producci&oacute;n</div>
+            <canvas id="OrdenesProduccion"></canvas>
+            <div class="dash-item-content"> </div>
+        </div>
+        <div class="dash-item">
+            <div class="dash-item-title">Inventario</div>
+            <canvas id="ElInventario"></canvas>
+            <div class="dash-item-content"> </div>
+        </div>
+        <div class="dash-item dash-footer">
+            <div class="dash-item-title">Contenido</div>
+            <div class="dash-item-content"> </div>
+        </div>
     </div>
-</body>
+</div>
 
-</html>
+<script>
+    // ============== Ordenes de producción ====================
+    var productionOrdersData = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        datasets: [{
+            label: 'En el tiempo',
+            data: [12, 19, 8, 15, 22, 9],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    // Configuración del gráfico
+    var chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    // Crear el gráfico de barras
+    var ctx = document.getElementById('OrdenesProduccion').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: productionOrdersData,
+        options: chartOptions
+    });
+
+    // ================ Inventario =================
+    var inventoryData = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        datasets: [{
+            label: 'Inventario',
+            data: [150, 180, 200, 160, 190, 210],
+            fill: false,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            tension: 0.1
+        }]
+    };
+
+    // Configuración del gráfico
+    var chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    // Crear el gráfico de línea
+    var ctx = document.getElementById('ElInventario').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: inventoryData,
+        options: chartOptions
+    });
+</script>
